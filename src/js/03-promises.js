@@ -1,9 +1,14 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
+
 const parametersForm = document.querySelector('.form');
 const submitButton = document.querySelector('.form button');
-
 parametersForm.addEventListener('submit', onFormSubmit);
+
+const notifyTimeout = 3000;
+Notify.init({
+  timeout: notifyTimeout,
+});
 
 function onFormSubmit(event) {
   event.preventDefault();
@@ -27,7 +32,7 @@ function onFormSubmit(event) {
 
   setTimeout(() => {
     submitButton.disabled = false;
-  }, promiseDelay);
+  }, promiseDelay + notifyTimeout);
 }
 
 function createPromise(position, delay) {
