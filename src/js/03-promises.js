@@ -24,6 +24,10 @@ function onFormSubmit(event) {
       });
     promiseDelay += promiseStep;
   }
+
+  setTimeout(() => {
+    submitButton.disabled = false;
+  }, promiseDelay);
 }
 
 function createPromise(position, delay) {

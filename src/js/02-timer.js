@@ -7,14 +7,14 @@ let selectedDate = null;
 
 const dateTimeInputEl = document.querySelector('input#datetime-picker');
 const startButtonEl = document.querySelector('[data-start]');
-startButtonEl.addEventListener('click', startTimer);
-
 const outputEl = {
   days: document.querySelector('[data-days]'),
   hours: document.querySelector('[data-hours]'),
   minutes: document.querySelector('[data-minutes]'),
   seconds: document.querySelector('[data-seconds]'),
 };
+
+startButtonEl.addEventListener('click', startTimer);
 
 const flatpickrOptions = {
   enableTime: true,
@@ -28,14 +28,8 @@ const flatpickrOptions = {
     startButtonEl.disabled = checkResult ? false : true;
   },
   onClose(selectedDates) {
-    const checkResult = dateCheck(selectedDate);
-    if (checkResult) {
-      const selectedDateRaw = selectedDate.getTime();
-      const currentDateRaw = Date.now();
-      displayInterval(selectedDateRaw - currentDateRaw);
-    } else {
+    if (!dateCheck(selectedDate)) {
       Notify.failure('Please choose a date in the future');
-      displayInterval(0);
     }
   },
 };
@@ -60,7 +54,8 @@ function displayInterval(interval) {
 
 function startTimer() {
   startButtonEl.disabled = true;
-  timer = setInterval(() => {
+  dateTimeInputEl.disabled = true;
+  const timer = setInterval(() => {
     const currentDateRaw = Date.now();
     const selectedDateRaw = selectedDate.getTime();
 
