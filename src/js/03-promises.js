@@ -10,8 +10,8 @@ Notify.init({
   timeout: notifyTimeout,
 });
 
-function onFormSubmit(event) {
-  event.preventDefault();
+function onFormSubmit(e) {
+  e.preventDefault();
   submitButton.disabled = true;
 
   const { delay, step, amount } = parametersForm.elements;
