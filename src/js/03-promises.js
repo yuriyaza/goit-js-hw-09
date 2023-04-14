@@ -5,14 +5,8 @@ const parametersForm = document.querySelector('.form');
 const submitButton = document.querySelector('.form button');
 parametersForm.addEventListener('submit', onFormSubmit);
 
-const notifyTimeout = 3000;
-Notify.init({
-  timeout: notifyTimeout,
-});
-
 function onFormSubmit(e) {
   e.preventDefault();
-  submitButton.disabled = true;
 
   const { delay, step, amount } = parametersForm.elements;
   let promiseDelay = Number(delay.value);
@@ -29,10 +23,6 @@ function onFormSubmit(e) {
       });
     promiseDelay += promiseStep;
   }
-
-  setTimeout(() => {
-    submitButton.disabled = false;
-  }, promiseDelay + notifyTimeout);
 }
 
 function createPromise(position, delay) {
